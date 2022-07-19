@@ -6,8 +6,8 @@ class Player {
     this.ctx = ctx;
     this.canvas = canvas;
     this.color = '#ffffff';
-    this.width = 50;
-    this.height = 50;
+    this.width = 80;
+    this.height = 80;
     this.gravity = 2.8;
     this.pos = new Vector(canvas.width * 0.5, canvas.height - this.height);
     this.vel = new Vector(0, 0);
@@ -69,16 +69,18 @@ class Player {
 
   draw() {
     this.ctx.beginPath();
-    this.ctx.fillStyle = this.collided ? 'blue' : this.color;
-    this.ctx.fill();
+    // this.ctx.lineWidth = 2;
+    // this.ctx.strokeStyle = this.collided ? 'blue' : this.color;
+    // this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
+    // this.ctx.stroke();
 
     this.ctx.beginPath();
-    // this.idle_sprite_sprite.draw(
-    //   this.pos.x,
-    //   this.pos.y,
-    //   this.width * 1.3,
-    //   this.height * 1.3
-    // );
+    this.idle_sprite_sprite.draw(
+      this.pos.x,
+      this.pos.y,
+      this.width * 1.3,
+      this.height * 1.3
+    );
   }
 }
 
