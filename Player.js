@@ -85,8 +85,6 @@ class Player {
     this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
     this.ctx.stroke();
 
-    this.ctx.beginPath();
-
     if (this.what_sprite === 'idle') {
       this.sprite_idle.draw(
         this.pos.x,
