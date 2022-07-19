@@ -1,6 +1,7 @@
 import { Vector } from './Vector';
 import { Sprite } from './sprite';
 import { idle_sprite } from './assets/idle_sprite';
+import { walk_sprite } from './assets/walk_sprite';
 
 class Player {
   constructor(ctx, canvas) {
@@ -18,15 +19,10 @@ class Player {
     this.jumpWeight = -40;
     this.isJumping = false;
     this.collided = false;
-    this.sprite = new Sprite(
-      this.ctx,
-      // './public/spritesheet_idle.png',
-      idle_sprite,
-      12,
-      6264,
-      422
-    );
+    this.sprite = new Sprite(this.ctx, walk_sprite, 12, 6264, 422);
     this.jump = this.jump.bind(this);
+    this.frame = 0;
+    this.dir = 1; // 1 = right, -1 = left
   }
 
   update() {
@@ -58,6 +54,7 @@ class Player {
       canvas.height - this.height
     );
     this.collided = false;
+    this.frame++;
   }
 
   jump() {
@@ -78,9 +75,10 @@ class Player {
       this.pos.x,
       this.pos.y,
       this.width * 1.3,
-      this.height * 1.3
+      this.height * 1.3,
+      this.dir
     );
-    this.sprite.update(0, 1);
+    this.sprite.update(this.frame, 3);
   }
 }
 

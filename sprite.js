@@ -29,7 +29,9 @@ class Sprite {
     }
   }
 
-  draw(x, y, w, h) {
+  draw(x, y, w, h, scale) {
+    this.ctx.save();
+    this.ctx.scale(scale, 1);
     this.ctx.drawImage(
       this.image,
       this.size.singleW * this.currentFrame,
@@ -41,6 +43,7 @@ class Sprite {
       w,
       h
     );
+    this.ctx.restore();
   }
 }
 
