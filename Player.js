@@ -67,10 +67,9 @@ class Player {
 
   draw() {
     this.ctx.beginPath();
-    // this.ctx.lineWidth = 2;
-    this.ctx.fillStyle = this.collided ? 'blue' : this.color;
+    this.ctx.strokeStyle = this.collided ? 'blue' : this.color;
     this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
-    this.ctx.fill();
+    this.ctx.stroke();
 
     this.ctx.beginPath();
     this.idle_sprite_sprite.draw(
