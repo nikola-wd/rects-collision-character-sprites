@@ -66,7 +66,9 @@ class Player {
     this.collided = false;
     this.frame++;
 
-    if (this.vel === 0) this.what_sprite = 'idle';
+    console.log(this.what_sprite);
+
+    // if (this.vel === 0) this.what_sprite = 'idle';
   }
 
   jump() {
@@ -93,11 +95,9 @@ class Player {
         this.height * 1.3
       );
       this.sprite_idle.update(this.frame, 3);
-      console.log('dir idle');
     }
 
     if (this.what_sprite === 'right') {
-      console.log('dir right');
       this.sprite_walk_right.draw(
         this.pos.x,
         this.pos.y,
@@ -108,8 +108,6 @@ class Player {
     }
 
     if (this.what_sprite === 'left') {
-      console.log('dir left');
-
       this.sprite_walk_left.draw(
         this.pos.x,
         this.pos.y,

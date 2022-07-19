@@ -70,11 +70,11 @@ function moveCallback({ code }) {
   if (code === 'ArrowUp') player.jump();
   if (code === 'ArrowLeft') {
     player.accel.setX(player.accelXSpeed * -1);
-    player.what_sprite === 'left';
+    player.what_sprite = 'left';
   }
   if (code === 'ArrowRight') {
     player.accel.setX(player.accelXSpeed);
-    player.what_sprite === 'right';
+    player.what_sprite = 'right';
   }
 }
 
