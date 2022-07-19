@@ -1,4 +1,5 @@
 import { Vector } from './Vector';
+import { Sprite } from './sprite';
 
 class Player {
   constructor(ctx, canvas) {
@@ -6,7 +7,7 @@ class Player {
     this.canvas = canvas;
     this.color = '#ffffff';
     this.width = 50;
-    this.height = 70;
+    this.height = 50;
     this.gravity = 2.8;
     this.pos = new Vector(canvas.width * 0.5, canvas.height - this.height);
     this.vel = new Vector(0, 0);
@@ -16,6 +17,13 @@ class Player {
     this.jumpWeight = -40;
     this.isJumping = false;
     this.collided = false;
+    this.idle_sprite_sprite = new Sprite(
+      this.ctx,
+      './public/spritesheet_idle.png',
+      12,
+      6264,
+      422
+    );
     this.jump = this.jump.bind(this);
   }
 
@@ -48,6 +56,8 @@ class Player {
       canvas.height - this.height
     );
     this.collided = false;
+
+    this.idle_sprite_sprite.update(0, 1);
   }
 
   jump() {
@@ -60,8 +70,15 @@ class Player {
   draw() {
     this.ctx.beginPath();
     this.ctx.fillStyle = this.collided ? 'blue' : this.color;
-    this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
     this.ctx.fill();
+
+    this.ctx.beginPath();
+    // this.idle_sprite_sprite.draw(
+    //   this.pos.x,
+    //   this.pos.y,
+    //   this.width * 1.3,
+    //   this.height * 1.3
+    // );
   }
 }
 
