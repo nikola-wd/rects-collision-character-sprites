@@ -56,8 +56,6 @@ class Player {
       canvas.height - this.height
     );
     this.collided = false;
-
-    this.idle_sprite_sprite.update(0, 1);
   }
 
   jump() {
@@ -70,9 +68,9 @@ class Player {
   draw() {
     this.ctx.beginPath();
     // this.ctx.lineWidth = 2;
-    // this.ctx.strokeStyle = this.collided ? 'blue' : this.color;
-    // this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
-    // this.ctx.stroke();
+    this.ctx.fillStyle = this.collided ? 'blue' : this.color;
+    this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
+    this.ctx.fill();
 
     this.ctx.beginPath();
     this.idle_sprite_sprite.draw(
@@ -81,6 +79,7 @@ class Player {
       this.width * 1.3,
       this.height * 1.3
     );
+    this.idle_sprite_sprite.update(0, 1);
   }
 }
 
