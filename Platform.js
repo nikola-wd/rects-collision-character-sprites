@@ -1,6 +1,11 @@
 import { Vector } from './Vector';
 import { collisionDetection } from './collisionDetection';
 
+const randomIntFromInterval = (min, max) => {
+  if (min === max) return min;
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 class Platform {
   constructor(x, y, width, height, ctx, player) {
     this.ctx = ctx;
@@ -48,7 +53,7 @@ class Platform {
   update() {
     this.checkCollisions();
     this.pos.add(this.vel);
-    if (this.pos.y < -this.height) {
+    if (this.pos.y < -this.height - randomIntFromInterval(0, 200)) {
       this.pos.setY(canvas.height);
     }
     if (this.collided) {
