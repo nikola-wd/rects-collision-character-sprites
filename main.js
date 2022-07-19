@@ -68,8 +68,14 @@ animate();
 
 function moveCallback({ code }) {
   if (code === 'ArrowUp') player.jump();
-  if (code === 'ArrowLeft') player.accel.setX(player.accelXSpeed * -1);
-  if (code === 'ArrowRight') player.accel.setX(player.accelXSpeed);
+  if (code === 'ArrowLeft') {
+    player.accel.setX(player.accelXSpeed * -1);
+    player.what_sprite === 'left';
+  }
+  if (code === 'ArrowRight') {
+    player.accel.setX(player.accelXSpeed);
+    player.what_sprite === 'right';
+  }
 }
 
 document.addEventListener('keydown', moveCallback);

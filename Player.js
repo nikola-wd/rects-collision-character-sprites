@@ -2,6 +2,7 @@ import { Vector } from './Vector';
 import { Sprite } from './sprite';
 import { idle_sprite } from './assets/idle_sprite';
 import { walk_sprite } from './assets/walk_sprite';
+import { walk_left_sprite } from './assets/walk_left_sprite';
 
 class Player {
   constructor(ctx, canvas) {
@@ -19,10 +20,19 @@ class Player {
     this.jumpWeight = -40;
     this.isJumping = false;
     this.collided = false;
-    this.sprite = new Sprite(this.ctx, walk_sprite, 12, 6264, 422);
+    this.sprite_idle = new Sprite(this.ctx, idle_sprite, 12, 6264, 422);
+    this.sprite_walk_right = new Sprite(this.ctx, walk_sprite, 12, 6264, 422);
+    this.sprite_walk_left = new Sprite(
+      this.ctx,
+      walk_left_sprite,
+      12,
+      6264,
+      422
+    );
+
     this.jump = this.jump.bind(this);
     this.frame = 0;
-    this.dir = 1; // 1 = right, -1 = left
+    this.what_sprite = 'idle'; // idle, left, right
   }
 
   update() {
@@ -55,11 +65,14 @@ class Player {
     );
     this.collided = false;
     this.frame++;
+
+    if (this.vel === 0) this.what_sprite = 'idle';
   }
 
   jump() {
     if (!this.isJumping) {
       this.vel.setY(this.jumpWeight);
+      this.what_sprite = 'idle';
       this.isJumping = true;
     }
   }
@@ -71,14 +84,40 @@ class Player {
     this.ctx.stroke();
 
     this.ctx.beginPath();
-    this.sprite.draw(
-      this.pos.x,
-      this.pos.y,
-      this.width * 1.3,
-      this.height * 1.3,
-      this.dir
-    );
-    this.sprite.update(this.frame, 3);
+
+    if (this.what_sprite === 'idle') {
+      this.sprite_idle.draw(
+        this.pos.x,
+        this.pos.y,
+        this.width * 1.3,
+        this.height * 1.3
+      );
+      this.sprite_idle.update(this.frame, 3);
+      console.log('dir idle');
+    }
+
+    if (this.what_sprite === 'right') {
+      console.log('dir right');
+      this.sprite_walk_right.draw(
+        this.pos.x,
+        this.pos.y,
+        this.width * 1.3,
+        this.height * 1.3
+      );
+      this.sprite_walk_right.update(this.frame, 3);
+    }
+
+    if (this.what_sprite === 'left') {
+      console.log('dir left');
+
+      this.sprite_walk_left.draw(
+        this.pos.x,
+        this.pos.y,
+        this.width * 1.3,
+        this.height * 1.3
+      );
+      this.sprite_walk_left.update(this.frame, 3);
+    }
   }
 }
 
