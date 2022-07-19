@@ -1,5 +1,6 @@
 import { Vector } from './Vector';
 import { Sprite } from './sprite';
+import { idle_sprite } from './assets/idle_sprite';
 
 class Player {
   constructor(ctx, canvas) {
@@ -17,9 +18,10 @@ class Player {
     this.jumpWeight = -40;
     this.isJumping = false;
     this.collided = false;
-    this.idle_sprite_sprite = new Sprite(
+    this.sprite = new Sprite(
       this.ctx,
-      './public/spritesheet_idle.png',
+      // './public/spritesheet_idle.png',
+      idle_sprite,
       12,
       6264,
       422
@@ -72,13 +74,13 @@ class Player {
     this.ctx.stroke();
 
     this.ctx.beginPath();
-    this.idle_sprite_sprite.draw(
+    this.sprite.draw(
       this.pos.x,
       this.pos.y,
       this.width * 1.3,
       this.height * 1.3
     );
-    this.idle_sprite_sprite.update(0, 1);
+    this.sprite.update(0, 1);
   }
 }
 
