@@ -10,7 +10,7 @@ class Player {
     this.canvas = canvas;
     this.color = '#ffffff';
     this.width = 80;
-    this.height = 80;
+    this.height = 120;
     this.gravity = 2.8;
     this.pos = new Vector(canvas.width * 0.5, canvas.height - this.height);
     this.vel = new Vector(0, 0);
@@ -41,6 +41,7 @@ class Player {
 
     // Friction and Move
     this.vel.multX(this.friction);
+    // console.log(this.vel.mag());
     this.pos.add(this.vel);
 
     // sides;
@@ -64,11 +65,12 @@ class Player {
       canvas.height - this.height
     );
     this.collided = false;
-    this.frame++;
+    if (this.frame === 60) this.frame = 0;
 
-    console.log(this.what_sprite);
+    // console.log(this.what_sprite);
+    // console.log(this.vel.x);
 
-    // if (this.vel === 0) this.what_sprite = 'idle';
+    if (this.vel.mag() === this.gravity) this.what_sprite = 'idle';
   }
 
   jump() {
@@ -80,40 +82,42 @@ class Player {
   }
 
   draw() {
-    // this.ctx.beginPath();
-    // this.ctx.strokeStyle = this.collided ? 'blue' : this.color;
-    // this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
-    // this.ctx.stroke();
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = this.collided ? 'blue' : this.color;
+    this.ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
+    this.ctx.stroke();
 
     if (this.what_sprite === 'idle') {
       this.sprite_idle.draw(
-        this.pos.x,
-        this.pos.y,
-        this.width * 1.3,
-        this.height * 1.3
+        this.pos.x - 66,
+        this.pos.y - 22,
+        this.width * 2.8,
+        this.height * 1.5
       );
       this.sprite_idle.update(this.frame, 3);
     }
 
     if (this.what_sprite === 'right') {
       this.sprite_walk_right.draw(
-        this.pos.x,
-        this.pos.y,
-        this.width * 1.3,
-        this.height * 1.3
+        this.pos.x - 66,
+        this.pos.y - 22,
+        this.width * 2.8,
+        this.height * 1.5
       );
       this.sprite_walk_right.update(this.frame, 3);
     }
 
     if (this.what_sprite === 'left') {
       this.sprite_walk_left.draw(
-        this.pos.x,
-        this.pos.y,
-        this.width * 1.3,
-        this.height * 1.3
+        this.pos.x - 66,
+        this.pos.y - 22,
+        this.width * 2.8,
+        this.height * 1.5
       );
       this.sprite_walk_left.update(this.frame, 3);
     }
+
+    this.frame++;
   }
 }
 
